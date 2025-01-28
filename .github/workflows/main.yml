@@ -21,7 +21,7 @@ jobs:
         NAME: Loganysl
       with:
         arch: arm64
-        compiler: gcc/14
+        compiler: aarch64-elf-gcc (GCC) 9.3.0
         defconfig: your_defconfig
         image: Image.gz-dtb
 
