@@ -36,42 +36,44 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update -y 
-        sudo apt-get install -y 
-          gcc-aarch64-linux-gnu 
-          gcc-arm-linux-gnueabi 
-          aria2 
-          binutils 
-          make 
-          python3 
-          libssl-dev 
-          build-essential 
-          bc 
-          bison 
-          flex 
-          unzip 
-          ca-certificates 
-          xz-utils 
-          mkbootimg 
-          cpio 
-          device-tree-compiler 
-          git 
+        sudo apt-get install -y \
+          gcc-aarch64-linux-gnu \
+          gcc-arm-linux-gnueabi \
+          aria2 \
+          binutils \
+          make \
+          python3 \
+          libssl-dev \
+          build-essential \
+          bc \
+          bison \
+          flex \
+          unzip \
+          ca-certificates \
+          xz-utils \
+          mkbootimg \
+          cpio \
+          device-tree-compiler \
+          git \
           git-lfs
         # Set up custom Clang
         aria2c -j$(nproc --all) $(curl -fsSL https://github.com/ZyCromerZ/Clang/raw/main/Clang-main-link.txt)
         mkdir zyc-clang
         tar -xzvf Clang-*.tar.gz -C zyc-clang >> /dev/null
-        # Mem module setup
+        #mem module
         curl -LSs "https://raw.githubusercontent.com/kuronami69/MemKernel/main/kernel/setup.sh" | bash -s M anrwt
-        
-
+         
+           
     - name: List Output Directory
       run: |
         echo "Listing contents of the output directory:"
         ls -R ./out/drivers/memkernel/
-
+        
     - name: Upload mem module
-      if: success() && (steps.list_output.outputs.files_found == 'true')
       uses: actions/upload-artifact@v4
       with:
         name: memodule
         path: "./out/drivers/memkernel/anrwt_memk.ko"
+
+
+
