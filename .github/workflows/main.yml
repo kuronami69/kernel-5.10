@@ -63,11 +63,6 @@ jobs:
         # Mem module setup
         curl -LSs "https://raw.githubusercontent.com/kuronami69/MemKernel/main/kernel/setup.sh" | bash -s M anrwt
         
-    - name: Build Kernel
-      run: |
-        export PATH=$(pwd)/zyc-clang/bin/:$PATH
-        make $KERNEL_CMDLINE $KERNEL_DEFCONFIG CC="ccache clang" LD=ld.lld
-        make $KERNEL_CMDLINE CC="ccache clang" LD=ld.lld -j$(nproc --all)
 
     - name: List Output Directory
       run: |
